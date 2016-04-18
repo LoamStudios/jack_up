@@ -10,7 +10,6 @@ getFilesFromEvent = (event) ->
 
 filesWithData = (event) ->
   _.map getFilesFromEvent(event), (file) ->
-    file.callingNode = event.target
     file.__guid__ = Math.random().toString(36)
     file
 
@@ -19,6 +18,7 @@ class @JackUp.Processor
     @uploadPath = options.path
 
   processFilesForEvent: (event) =>
+    callingNode = event.target
     _.each filesWithData(event), (file) =>
       reader = new FileReader()
       reader.onload = (event) =>
@@ -26,7 +26,7 @@ class @JackUp.Processor
 
         if /^data:image/.test event.target.result
           image = $("<img>").attr("src", event.target.result)
-          @trigger 'upload:imageRenderReady', image: image, file: file
+          @trigger 'upload:imageRenderReady', image: image, file: file, callingNode: callingNode
 
       reader.readAsDataURL(file)
 
