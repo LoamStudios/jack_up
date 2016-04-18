@@ -10,6 +10,7 @@ getFilesFromEvent = (event) ->
 
 filesWithData = (event) ->
   _.map getFilesFromEvent(event), (file) ->
+    file.callingNode = event.target
     file.__guid__ = Math.random().toString(36)
     file
 
