@@ -19,8 +19,6 @@ class @JackUp.DragAndDrop
     @droppableElement.removeClass("hover")
 
   _drop: (event) =>
-    console.log "FROM JACKUP!:"
-    console.log $(event.target)
     ignoreEvent event
     @droppableElement.removeClass("hover")
     @processor.processFilesForEvent(event)
