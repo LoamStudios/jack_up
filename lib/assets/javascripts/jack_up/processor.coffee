@@ -22,7 +22,7 @@ class @JackUp.Processor
     _.each filesWithData(event), (file) =>
       reader = new FileReader()
       reader.onload = (event) =>
-        @trigger 'upload:dataRenderReady', result: event.target.result, file: file
+        @trigger 'upload:dataRenderReady', result: event.target.result, file: file, callingNode: callingNode
 
         if /^data:image/.test event.target.result
           image = $("<img>").attr("src", event.target.result)
